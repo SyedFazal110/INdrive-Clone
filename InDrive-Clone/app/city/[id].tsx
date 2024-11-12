@@ -28,10 +28,7 @@ const map = () => {
 
   const GRAPHHOPPER_API_KEY = 'fa1e1eaf-80ea-431a-ac6e-a03c33117690';
  
-  //GraphHopper Directions Function
 
-  //api sy route ka data fetch krta ha origin or destination ki lat/lon le kr
-  //route ko calculate krta ha or route coordinates return krta h
   const fetchGraphhopperDirections = async (origin, destination) => {
     const url = `https://graphhopper.com/api/1/route?point=${origin.latitude},${origin.longitude}&point=${destination.latitude},${destination.longitude}&vehicle=car&locale=en&instructions=false&points_encoded=false&key=${GRAPHHOPPER_API_KEY}`;
     try {
@@ -60,7 +57,6 @@ const map = () => {
   }, [location, singlesearchPlace]);
 
 
- //jab user ki permission milti ha tw user ki location fetch krta ha
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -79,7 +75,6 @@ const map = () => {
         longitudeDelta: 0.05,
       });
        
-      //reverseGeocodeAsync user ka current address store krta ha set address ma
       const [geoAddress] = await Location.reverseGeocodeAsync({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
@@ -89,7 +84,6 @@ const map = () => {
   }, []);
 
 
- // function ko call karta hai jo places ko search karne ka kaam karta hai.
   useEffect(() => {
     if (search) {
       searchPlaces();
@@ -101,7 +95,6 @@ const map = () => {
   const handlePress = (id) => {
     setIcons(id === icons ? null : id);
   };
- //ye function Foursquare API se places search karta hai
   const searchPlaces = () => {
     if (!search || !location) return;
     const options = {
